@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "leafsee"
+version = "0.0.1"
+description = ""
+authors = ["Tortole <xorid@mail.ru>"]
+readme = "README.md"
+packages = [
+    { include = "util_tools" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.7"
+django-environ = "^0.11.2"
+mysqlclient = "^2.2.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.5.0"
+black = "^23.11.0"
+flake8 = "^6.1.0"
+
+[tool.poetry.scripts]
+full_migrate = "util_tools.scripts:full_migrate"
+init = "util_tools.scripts:init"
+runserver = "util_tools.scripts:runserver"
+lint = "util_tools.scripts:flake8"
+format = "util_tools.scripts:black"
+tailwind = "util_tools.scripts:tailwind"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
