@@ -39,8 +39,8 @@ class Subscriptions(models.Model):
     Model for tracking subscriptions
 
     Fields:
-        subscriber - ForeignKey - who subscribed
-        content_creator - ForeignKey - subscribed to
+        subscriber - ForeignKey(LeafseeUser) - who subscribed
+        content_creator - ForeignKey(LeafseeUser) - subscribed to
         subscriptions_date - DateField - date of subscriptions
 
     Notes:
@@ -53,7 +53,7 @@ class Subscriptions(models.Model):
     content_creator = models.ForeignKey(
         LeafseeUser, related_name="content_creator", on_delete=models.CASCADE
     )
-    subscriptions_date = models.DateField()
+    subscriptions_date = models.DateField(auto_now_add=True)
 
     class Meta:
         # Unique pair of subscriber and content_creator
