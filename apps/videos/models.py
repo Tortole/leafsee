@@ -84,7 +84,7 @@ class Comment(models.Model):
 
     text = models.TextField()
     publication_date = models.DateField(auto_now_add=True)
-    author = models.ForeignKey(LeafseeUser)
+    author = models.ForeignKey(LeafseeUser, on_delete=models.SET_NULL)
     likes = models.ManyToManyField(LeafseeUser)
     dislikes = models.ManyToManyField(LeafseeUser)
     source_type = models.ForeignKey(
