@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "apps.personal_account",
 ]
 
+AUTH_USER_MODEL = "accounts.LeafseeUser"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

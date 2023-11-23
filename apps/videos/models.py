@@ -62,9 +62,9 @@ class Video(models.Model):
     publication_date = models.DateField(auto_now_add=True)
     preview_image = models.ImageField(upload_to=preview_directory_path)
     tags = models.ManyToManyField(Tag)
-    likes = models.ManyToManyField(LeafseeUser)
-    dislikes = models.ManyToManyField(LeafseeUser)
-    views = models.ManyToManyField(LeafseeUser)
+    likes = models.ManyToManyField(LeafseeUser, related_name="liked_videos")
+    dislikes = models.ManyToManyField(LeafseeUser, related_name="disliked_videos")
+    views = models.ManyToManyField(LeafseeUser, related_name="watched_videos")
 
 
 class Comment(models.Model):
@@ -84,9 +84,9 @@ class Comment(models.Model):
 
     text = models.TextField()
     publication_date = models.DateField(auto_now_add=True)
-    author = models.ForeignKey(LeafseeUser, on_delete=models.SET_NULL)
-    likes = models.ManyToManyField(LeafseeUser)
-    dislikes = models.ManyToManyField(LeafseeUser)
+    author = models.ForeignKey(LeafseeUser, on_delete=models.SET_NULL, null=True)
+    likes = models.ManyToManyField(LeafseeUser, related_name="liked_comments")
+    dislikes = models.ManyToManyField(LeafseeUser, related_name="disliked_comments")
     source_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE,
@@ -96,4 +96,4 @@ class Comment(models.Model):
         ),
     )
     source_id = models.PositiveIntegerField()
-    source = GenericForeignKey("content_type", "object_id")
+    source = GenericForeignKey("source_type", "source_id")
